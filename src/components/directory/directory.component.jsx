@@ -10,35 +10,35 @@ export default class Directory extends Component {
             sections: [
                 {
                     title: 'hats',
-                    imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+                    imageUrl: '/images/hats.png',
                     id: 1,
-                    linkUrl: 'shop/hats'
+                    linkUrl: 'shop-page/hats'
                 },
                 {
                     title: 'jackets',
-                    imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
+                    imageUrl: '/images/jackets.png',
                     id: 2,
-                    linkUrl: 'shop/jackets'
+                    linkUrl: 'shop-page/jackets'
                 },
                 {
                     title: 'sneakers',
-                    imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
+                    imageUrl: '/images/sneakers.png',
                     id: 3,
-                    linkUrl: 'shop/sneakers'
+                    linkUrl: 'shop-page/sneakers'
                 },
                 {
                     title: 'womens',
-                    imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
+                    imageUrl: '/images/womens.png',
                     size: 'large',
                     id: 4,
-                    linkUrl: 'shop/womens'
+                    linkUrl: 'shop-page/womens'
                 },
                 {
                     title: 'mens',
-                    imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
+                    imageUrl: '/images/men.png',
                     size: 'large',
                     id: 5,
-                    linkUrl: 'shop/mens'
+                    linkUrl: 'shop-page/mens'
                 }
             ]
         }
@@ -49,7 +49,7 @@ export default class Directory extends Component {
             <div className='directory-menu'>
                 {
                     this.state.sections.map(
-                        ({title, id, imageUrl,size}) => (<MenuItem key={id} size={size} imageUrl={imageUrl} title={title}/>)
+                        ({id, ...OtherProps}) => (<MenuItem key={id} {...OtherProps}/>)
                     )
                 }
             </div>)
