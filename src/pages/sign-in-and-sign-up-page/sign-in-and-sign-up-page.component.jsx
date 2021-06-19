@@ -1,0 +1,15 @@
+import "./sign-in-and-sign-up-page.styles.scss"
+import SignIn from "../../components/sign-in/sign-in.component";
+
+
+const SignInAndSignUpPage = props => {
+    return (
+        <div className='sign-in-and-sign-up-page'>
+            <SignIn/>
+
+        </div>
+    );
+}
+
+
+export default SignInAndSignUpPage
