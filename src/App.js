@@ -1,30 +1,55 @@
 import React, {Component} from 'react';
 import './App.css';
-import {Switch, Route} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import HomePage from "./pages/home-page/home-page.component";
 import ShopPage from "./pages/shop-page/shop-page.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up-page/sign-in-and-sign-up-page.component";
-import {auth} from "./firebase/firebase.utils";
+import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
 
-class App extends Component{
+class App extends Component {
+
+    unsubscribeFromAuth = null;
 
     constructor(props) {
         super(props);
 
-        this.state={
-            currentUser:null,
+        this.state = {
+            currentUser: null,
         }
     }
 
-    unsubscribeFromAuth=null;
-
     componentDidMount() {
-      this.unsubscribeFromAuth =  auth.onAuthStateChanged(user =>{
-            this.setState({currentUser:user})
+        this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 
-            console.log(user)
-        } )
+            if (userAuth) {
+
+
+                const userRef = await createUserProfileDocument(userAuth);
+                userRef.onSnapshot(snapshot => {
+                    this.setState({
+                        currentUser: {
+                            id: snapshot.id,
+                            ...snapshot.data()
+                        }
+                    })
+                    console.log(snapshot.data())
+                })
+                // this.setState({
+                //     currentUser: {
+                //         id:userRef.id,
+                //         ...userRef.data()
+                //     }
+                // })
+                console.log(userRef)
+            } else {
+                this.setState({
+                    currentUser: null
+                })
+            }
+
+            // console.log(user)
+        })
     }
 
     componentWillUnmount() {
