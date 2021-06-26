@@ -31,3 +31,23 @@ export const addItemToCart = (cartItems, newItem) => {
 
     return freshCartItems;
 }
+export const removeItemFromCart = (cartItems, newItem) => {
+
+    let existingItem = cartItems[newItem.name]
+    let freshCartItems = {...cartItems};
+    if (existingItem && existingItem.quantity >= 1) {
+        --freshCartItems[newItem.name].quantity
+
+    }
+
+    return freshCartItems;
+}
+
+export const clearItemFromCart = (cartItems, newItem) => {
+
+    let freshCartItems = {...cartItems};
+
+    delete freshCartItems[newItem.name];
+
+    return freshCartItems;
+}
