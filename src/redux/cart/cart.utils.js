@@ -23,7 +23,7 @@ export const addItemToCart = (cartItems, newItem) => {
     } else {
         freshCartItems[newItem.name] = {
             item: {
-                ...newItem.item
+                ...newItem
             },
             quantity: 1
         }
