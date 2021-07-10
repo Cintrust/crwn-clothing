@@ -39,7 +39,7 @@ class App extends Component {
                         ...snapshot.data()
                     })
 
-                    console.log(snapshot.data())
+                    // console.log(snapshot.data())
                 })
                 // this.setState({
                 //     currentUser: {
@@ -53,7 +53,7 @@ class App extends Component {
                 setCurrentUser(null)
             }
 
-            // console.log(user)
+
         })
     }
 
@@ -72,7 +72,7 @@ class App extends Component {
                 <Header/>
                 <Switch>
                     <Route path="/" exact={true} component={HomePage}/>
-                    <Route path="/shop"  component={ShopPage}/>
+                    <Route path="/shop" component={ShopPage}/>
                     <Route path="/checkout" exact={true} component={Checkout}/>
                     <Route path="/sign-in" exact={true}
                            render={this.renderHelper}
@@ -86,9 +86,9 @@ class App extends Component {
 
 }
 
-const mapStateToProps = createStructuredSelector( {
-        currentUser: selectCurrentUser
-    })
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+})
 
 
 const mapDispatchToProps = (dispatch) => {

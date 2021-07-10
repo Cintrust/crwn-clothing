@@ -20,6 +20,7 @@ firebase.initializeApp(config);
 export const auth = firebase.auth()
 export const firestore = firebase.firestore()
 
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     if (!userAuth) return;
@@ -50,4 +51,25 @@ provider.setCustomParameters({"prompt": "select_account"})
 export const signInWithGoogle = () => auth.signInWithPopup(provider)
 
 
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = firestore.collection(collectionKey)
+    // return ;
+    let batch = firestore.batch();
+
+    for (let obj of objectsToAdd) {
+        const docRef = collectionRef.doc()
+        batch.set(docRef, obj)
+    }
+
+    return await batch.commit()
+}
+
+
+export const convertCollectionsSnapshotToMap = (collectionsSnapshot) => {
+    return collectionsSnapshot.docs.reduce((accumulator, snapshot) => {
+        let data = snapshot.data()
+        accumulator[data.title.toLowerCase()] = data
+        return accumulator;
+    }, {})
+}
 export default firebase;
